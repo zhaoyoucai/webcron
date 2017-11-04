@@ -208,6 +208,7 @@ func (this *TaskController) Logs() {
 	this.display()
 }
 
+
 // 查看日志详情
 func (this *TaskController) ViewLog() {
 	id, _ := this.GetInt("id")
@@ -236,6 +237,15 @@ func (this *TaskController) ViewLog() {
 	this.Data["pageTitle"] = "查看日志"
 	this.display()
 }
+
+
+// 根据task_id清空日志
+func (this *TaskController) LogClear() {
+	taskId, _ := this.GetInt("id")
+	models.TaskLogDelByTaskId(taskId)
+	this.ajaxMsg("", MSG_OK)
+}
+
 
 // 批量操作日志
 func (this *TaskController) LogBatch() {

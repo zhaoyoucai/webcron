@@ -37,6 +37,7 @@ func main() {
 	beego.Router("/profile", &controllers.MainController{}, "*:Profile")
 	beego.Router("/gettime", &controllers.MainController{}, "*:GetTime")
 	beego.Router("/help", &controllers.HelpController{}, "*:Index")
+	beego.Router("/about", &controllers.HelpController{}, "*:About")
 	beego.AutoRouter(&controllers.TaskController{})
 	beego.AutoRouter(&controllers.GroupController{})
 

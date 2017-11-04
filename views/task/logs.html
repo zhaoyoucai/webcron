@@ -29,6 +29,7 @@
 			</div>
 			
 			<div class="btn-group">
+				<a href="javascript:;" data-val="{{.task.Id}}" class="btn btn-danger btn-large clearLog"><span class="icon-trash"></span> 清空日志</a>
 				<a href="{{urlfor "TaskController.List"}}" class="btn btn-large"><span class="icon-chevron-left"></span> 返 回</a>
 			</div>
 			
@@ -88,6 +89,22 @@ $(function() {
 	$("input[name='chkall']").click(function () {
 		$("input[name='ids']").attr("checked", $(this).attr("checked") == "checked");
 	});
+	
+	$('.clearLog').click(function(){
+		var taskId = $(this).attr('data-val');
+		//console.log(taskId);
+		var url = "{{urlfor "TaskController.LogClear"}}";
+		$.post(url + "?id=" + taskId, function(out) {
+			//console.log(out);
+			if (out.status != 0) {
+				$(".alert").text(out.msg);
+				$(".alert").show();
+			} else {
+				window.location.reload();
+			}
+		}, "json");
+	});
+	
 });
 
 function batch(action) {
